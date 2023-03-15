@@ -1,1 +1,1 @@
-extern crate trust_atom;
+pub extern crate trust_atom;

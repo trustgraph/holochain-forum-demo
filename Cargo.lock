@@ -1268,6 +1268,7 @@ dependencies = [
  "hdk",
  "posts_integrity",
  "serde",
+ "trust_atom_zome",
 ]
 
 [[package]]
@@ -1937,6 +1938,7 @@ checksum = "683ba5022fe6dbd7133cad150478ccf51bdb6d861515181e5fc6b4323d4fa424"
 [[package]]
 name = "trust_atom"
 version = "0.0.10-dev"
+source = "git+https://github.com/trustgraph/trustgraph-holochain.git?rev=7888e6fa1d7f459a5485dab267490aa5005c95fc#7888e6fa1d7f459a5485dab267490aa5005c95fc"
 dependencies = [
  "hdk",
  "rust_decimal",
@@ -1947,6 +1949,7 @@ dependencies = [
 [[package]]
 name = "trust_atom_integrity"
 version = "0.0.10-dev"
+source = "git+https://github.com/trustgraph/trustgraph-holochain.git?rev=7888e6fa1d7f459a5485dab267490aa5005c95fc#7888e6fa1d7f459a5485dab267490aa5005c95fc"
 dependencies = [
  "hdi",
  "rust_decimal",

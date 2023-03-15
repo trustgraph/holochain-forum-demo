@@ -1,5 +1,6 @@
 use hdk::prelude::*;
 use posts_integrity::*;
+use trust_atom_zome::trust_atom::*;
 
 #[hdk_extern]
 pub fn create_comment(comment: Comment) -> ExternResult<Record> {
@@ -13,6 +14,14 @@ pub fn create_comment(comment: Comment) -> ExternResult<Record> {
     let record = get(comment_hash.clone(), GetOptions::default())?.ok_or(wasm_error!(
         WasmErrorInner::Guest(String::from("Could not find the newly created Comment"))
     ))?;
+
+    create_trust_atom(TrustAtomInput {
+        target: AnyLinkableHash::from(comment_hash.clone()),
+        content: Some("worth commenting on".to_string()),
+        value: Some("1".to_string()),
+        extra: None,
+    })?;
+
     Ok(record)
 }
 
