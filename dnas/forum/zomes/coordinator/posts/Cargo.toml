@@ -12,4 +12,5 @@ hdk = { workspace = true }
 serde = { workspace = true }
 posts_integrity = { workspace = true }
 
-trust_atom_zome = { path = "../../../../trust_atom_zome" }
+trust_atom_types = {git = "https://github.com/trustgraph/trustgraph-holochain.git", rev="4ab043798780f6bf4c43acf7cc8704bf3842a860", package = "trust_atom_types"}
+# trust_atom_types = { path= "/Users/knight/code/trustgraph/trustgraph-holochain/zomes/trust_atom_types"}

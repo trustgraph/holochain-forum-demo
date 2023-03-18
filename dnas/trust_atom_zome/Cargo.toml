@@ -11,7 +11,7 @@ name = "trust_atom_zome"
 git-fetch-with-cli = false # default is false
 
 [dependencies]
-trust_atom = {git = "https://github.com/trustgraph/trustgraph-holochain.git", rev="7888e6fa1d7f459a5485dab267490aa5005c95fc", package = "trust_atom"}
+trust_atom = {git = "https://github.com/trustgraph/trustgraph-holochain.git", rev="4ab043798780f6bf4c43acf7cc8704bf3842a860", package = "trust_atom"}
 # trust_atom = { path= "/Users/knight/code/trustgraph/trustgraph-holochain/zomes/trust_atom"}
 
 hdk = "=0.1.1"

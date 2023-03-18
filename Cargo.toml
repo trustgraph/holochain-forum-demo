@@ -9,6 +9,7 @@ members = [
   "dnas/*/zomes/coordinator/*",
   "dnas/*/zomes/integrity/*",
   "dnas/trust_atom_zome",
+  "dnas/trust_atom_integrity_zome",
 ]
 
 [workspace.dependencies]
