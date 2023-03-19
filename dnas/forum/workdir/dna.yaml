@@ -10,6 +10,10 @@ integrity:
       hash: ~
       bundled: "../../../target/wasm32-unknown-unknown/release/posts_integrity.wasm"
       dependencies: ~
+    - name: trust_atom_integrity
+      bundled: ../../../target/wasm32-unknown-unknown/release/trust_atom_integrity_zome.wasm
+      hash: ~
+      dependencies: ~
 coordinator:
   zomes:
     - name: posts
@@ -17,3 +21,8 @@ coordinator:
       bundled: "../../../target/wasm32-unknown-unknown/release/posts.wasm"
       dependencies:
         - name: posts_integrity
+    - name: trust_atom
+      bundled: ../../../target/wasm32-unknown-unknown/release/trust_atom_zome.wasm
+      dependencies:
+        - name: trust_atom_integrity
+      hash: ~

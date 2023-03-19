@@ -5,7 +5,12 @@ opt-level = "z"
 opt-level = "z"
 
 [workspace]
-members = ["dnas/*/zomes/coordinator/*", "dnas/*/zomes/integrity/*"]
+members = [
+  "dnas/*/zomes/coordinator/*",
+  "dnas/*/zomes/integrity/*",
+  "dnas/trust_atom_zome",
+  "dnas/trust_atom_integrity_zome",
+]
 
 [workspace.dependencies]
 hdi = "=0.2.1"

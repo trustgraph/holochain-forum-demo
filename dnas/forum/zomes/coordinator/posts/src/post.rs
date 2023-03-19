@@ -1,16 +1,34 @@
 use hdk::prelude::*;
 use posts_integrity::*;
+use trust_atom_types::TrustAtomInput;
+
 #[hdk_extern]
 pub fn create_post(post: Post) -> ExternResult<Record> {
     let post_hash = create_entry(&EntryTypes::Post(post.clone()))?;
-    let record = get(post_hash.clone(), GetOptions::default())?
-        .ok_or(
-            wasm_error!(
-                WasmErrorInner::Guest(String::from("Could not find the newly created Post"))
-            ),
-        )?;
+    let record = get(post_hash.clone(), GetOptions::default())?.ok_or(wasm_error!(
+        WasmErrorInner::Guest(String::from("Could not find the newly created Post"))
+    ))?;
     let path = Path::from("all_posts");
-    create_link(path.path_entry_hash()?, post_hash.clone(), LinkTypes::AllPosts, ())?;
+    create_link(
+        path.path_entry_hash()?,
+        post_hash.clone(),
+        LinkTypes::AllPosts,
+        (),
+    )?;
+
+    call(
+        CallTargetCell::Local,
+        ZomeName::from("trust_atom"),
+        FunctionName::from("create_trust_atom"),
+        None,
+        TrustAtomInput {
+            target: AnyLinkableHash::from(post_hash.clone()),
+            content: Some("Such a good post!".to_string()),
+            value: Some("1".to_string()),
+            extra: None,
+        },
+    )?;
+
     Ok(record)
 }
 #[hdk_extern]
@@ -33,22 +51,16 @@ pub struct UpdatePostInput {
 }
 #[hdk_extern]
 pub fn update_post(input: UpdatePostInput) -> ExternResult<Record> {
-    let updated_post_hash = update_entry(
-        input.previous_post_hash.clone(),
-        &input.updated_post,
-    )?;
+    let updated_post_hash = update_entry(input.previous_post_hash.clone(), &input.updated_post)?;
     create_link(
         input.original_post_hash.clone(),
         updated_post_hash.clone(),
         LinkTypes::PostUpdates,
         (),
     )?;
-    let record = get(updated_post_hash.clone(), GetOptions::default())?
-        .ok_or(
-            wasm_error!(
-                WasmErrorInner::Guest(String::from("Could not find the newly updated Post"))
-            ),
-        )?;
+    let record = get(updated_post_hash.clone(), GetOptions::default())?.ok_or(wasm_error!(
+        WasmErrorInner::Guest(String::from("Could not find the newly updated Post"))
+    ))?;
     Ok(record)
 }
 #[hdk_extern]
